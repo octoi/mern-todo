@@ -1,5 +1,11 @@
+const dotenv = require('dotenv');
 const express = require('express')
+const connectDb = require('./mongo/config');
+
+dotenv.config()
 const app = express()
+
+connectDb() // connect to mongo db
 
 app.get('/', (req, res) => {
     res.send("Node rocks")
