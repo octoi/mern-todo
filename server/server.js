@@ -8,7 +8,7 @@ const app = express()
 connectDb() // connect to mongo db
 
 app.get('/', (req, res) => {
-    res.send("Node rocks")
+    res.send("MERN Todo Rocks 🤘")
 })
 
 const port = process.env.PORT || 5000
