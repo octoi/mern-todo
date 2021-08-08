@@ -6,6 +6,11 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const { username, password } = userData
 
+      if (!username || !password) {
+        reject('Required fields not found 🤷‍♂️')
+        return
+      }
+
       const userExists = await User.findOne({ username })
 
       if (userExists) {
