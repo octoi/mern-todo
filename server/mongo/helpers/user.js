@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User');
-const { generateErrorMessage, generateSuccessMessage } = require('../../utils/generator')
 
 module.exports = {
   register: async (userData) => {
@@ -10,7 +9,7 @@ module.exports = {
       const userExists = await User.findOne({ username })
 
       if (userExists) {
-        reject(generateErrorMessage('User already exists 🤷‍♂️'))
+        reject('User already exists 🤷‍♂️')
         return
       }
 
@@ -19,7 +18,7 @@ module.exports = {
       const newUser = await User.create({ username, password }).catch(err => {
         console.log(`[🙆‍♂️😭] failed to create user`)
         console.log("---\n", userData)
-        reject(generateErrorMessage('Failed to register 😓'))
+        reject('Failed to register 😓')
       })
 
       const token = generateToken({
@@ -33,7 +32,7 @@ module.exports = {
         token
       }
 
-      resolve(generateSuccessMessage(data))
+      resolve(data)
     })
   }
 }
