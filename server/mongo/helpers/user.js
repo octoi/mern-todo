@@ -10,16 +10,14 @@ module.exports = {
         return
       }
 
-      const userExists = await User.findOne({ username })
-      if (userExists) {
+      const oldUser = await User.findOne({ username })
+
+      if (oldUser) {
         reject('User already exists 🤷‍♂️')
-        return
+        return;
       }
 
-      password = await bcrypt.hash(password, 12).catch(err => {
-        reject("Failed to hash")
-        return
-      });
+      password = await bcrypt.hash(password, 12)
 
       const userRes = await User.create({ username, password }).catch(err => {
         console.log(`[🙆‍♂️😭] failed to create user`)
@@ -29,7 +27,7 @@ module.exports = {
 
       const token = generateToken({
         ...userRes._doc,
-        id: userRes._id,
+        id: userRes._id
       });
 
       const data = {
@@ -38,7 +36,37 @@ module.exports = {
         token
       }
 
-      resolve(data)
+      resolve(data);
+    })
+  },
+
+  login: ({ username, password }) => {
+    return new Promise(async (resolve, reject) => {
+      if (!username || !password) {
+        reject('Required fields not found 🤷‍♂️')
+        return
+      }
+
+      const user = await User.findOne({ username });
+
+      if (!user) reject(generateErrorMessage('No such user 🤷‍♂️'));
+
+      const match = await bcrypt.compare(password, user.password);
+
+      if (!match) reject(generateErrorMessage('Incorrect password 🤐'));
+
+      const token = generateToken({
+        ...user._doc,
+        id: user._id
+      });
+
+      const data = {
+        username: user.username,
+        id: user._id,
+        token
+      }
+
+      resolve(data);
     })
   }
 }
