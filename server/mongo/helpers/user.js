@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User');
 
 module.exports = {
-  register: async (userData) => {
-    return new Promise((resolve, reject) => {
+  register: (userData) => {
+    return new Promise(async (resolve, reject) => {
       const { username, password } = userData
 
       const userExists = await User.findOne({ username })
