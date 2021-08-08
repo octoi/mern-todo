@@ -9,4 +9,10 @@ router.post('/register', (req, res) => {
     .catch(data => res.json(generateErrorMessage(data)))
 })
 
+router.post('/login', (req, res) => {
+  userHelper.login(req.body)
+    .then(data => res.json(generateSuccessMessage(data)))
+    .catch(data => res.json(generateErrorMessage(data)))
+})
+
 module.exports = router

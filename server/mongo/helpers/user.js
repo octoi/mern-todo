@@ -49,11 +49,17 @@ module.exports = {
 
       const user = await User.findOne({ username });
 
-      if (!user) reject(generateErrorMessage('No such user 🤷‍♂️'));
+      if (!user) {
+        reject('No such user 🤷‍♂️')
+        return
+      }
 
       const match = await bcrypt.compare(password, user.password);
 
-      if (!match) reject(generateErrorMessage('Incorrect password 🤐'));
+      if (!match) {
+        reject('Incorrect password 🤐')
+        return
+      }
 
       const token = generateToken({
         ...user._doc,
