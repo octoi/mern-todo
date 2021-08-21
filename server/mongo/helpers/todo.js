@@ -15,6 +15,13 @@ module.exports = {
         reject('No such user 🤷‍♂️')
         return;
       }
+
+      const todoRes = Todo.create({ user: user?.id, title: todo, resolved: false }).catch(err => {
+        console.log(`[📝😭] failed to create todo`)
+        reject('Failed to create todo 😓')
+      });
+
+      resolve(todoRes)
     });
   }
 }
