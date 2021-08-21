@@ -15,4 +15,10 @@ router.post('/create', (req, res) => {
     .catch(data => res.json(generateErrorMessage(data)))
 });
 
+router.delete('/delete', (req, res) => {
+  todoHelper.deleteTodo(req.body)
+    .then(data => res.json(generateSuccessMessage(data)))
+    .catch(data => res.json(generateErrorMessage(data)))
+});
+
 module.exports = router;
