@@ -46,5 +46,42 @@ module.exports = {
 
       resolve(todoRes)
     });
+  },
+
+  deleteTodo: ({ username, todoId }) => {
+    return new Promise(async (resolve, reject) => {
+      if (!username || !todoId) {
+        reject('Required fields not found 🤷‍♂️')
+        return
+      }
+
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        reject('No such user 🤷‍♂️')
+        return;
+      }
+
+      const todo = await Todo.findById(todoId).catch(err => {
+        console.log(err)
+        console.log(`[📝😭] failed to delete todo`)
+        reject('Failed to delete todo 😓')
+      });
+
+      if (!todo) {
+        reject('No such todo in database 🤐')
+      }
+
+      if (todo?.user != user?.id) {
+        reject('Access denied, you don\'t have authorization to delete this todo 👮‍♂️')
+      }
+
+      await Todo.findByIdAndDelete(todoId).catch(err => {
+        console.log(`[📝😭] failed to delete todo`)
+        reject('Failed to delete todo 😓')
+      })
+
+      resolve('Todo deleted successfully 🤖')
+    });
   }
 }
