@@ -4,7 +4,7 @@ const todoHelper = require('../mongo/helpers/todo');
 const { generateErrorMessage, generateSuccessMessage } = require('../utils/generator')
 
 router.get('/', (req, res) => {
-  todoHelper.getAllTodos(req.body)
+  todoHelper.getAllTodos(req.headers)
     .then(data => res.json(generateSuccessMessage(data)))
     .catch(data => res.json(generateErrorMessage(data)))
 });
