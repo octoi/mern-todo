@@ -39,7 +39,7 @@ module.exports = {
         return;
       }
 
-      const todoRes = Todo.create({ user: user?.id, title: todo, resolved: false }).catch(err => {
+      const todoRes = Todo.create({ user: user?.id, title: todo }).catch(err => {
         console.log(`[📝😭] failed to create todo`)
         reject('Failed to create todo 😓')
       });
