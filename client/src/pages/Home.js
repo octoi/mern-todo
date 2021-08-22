@@ -40,7 +40,7 @@ export default function Home() {
           </InputRightElement>
         </InputGroup>
       </Flex>
-      <Flex mt={5} direction="column">
+      <Flex mt={10} direction="column">
         {allTodo.map(todo => <p>{todo?.title}</p>)}
       </Flex>
     </Auth>
