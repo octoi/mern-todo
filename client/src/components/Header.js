@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom';
 import useAppContext from '../context/useAppContext';
 
 export default function Header() {
-  const { user, setUser } = useAppContext();
+  const { user, logout } = useAppContext();
   const history = useHistory();
 
   const handleButtonClick = () => {
-    setUser();
+    logout();
     history.push('/login');
   }
 
