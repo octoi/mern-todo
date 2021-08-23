@@ -32,7 +32,12 @@ export default function Home() {
     <Auth isHome>
       <AddTodo addTodoToUi={addTodoToUi} user={user} />
       <Flex mt={10} direction="column">
-        {allTodo.map(todo => <TodoItem todo={todo} key={todo?._id} deleteFromUi={deleteTodoFromUi} />)}
+        {allTodo.map(todo => <TodoItem
+          key={todo?._id}
+          todo={todo}
+          username={user?.username}
+          deleteFromUi={deleteTodoFromUi} />
+        )}
       </Flex>
     </Auth>
   )

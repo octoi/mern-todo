@@ -16,7 +16,12 @@ router.post('/create', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-  todoHelper.deleteTodo(req.headers)
+  const extractedDataFromHeader = {
+    username: req.headers.username,
+    todoId: req.headers.todoid,
+  }
+
+  todoHelper.deleteTodo(extractedDataFromHeader)
     .then(data => res.json(generateSuccessMessage(data)))
     .catch(data => res.json(generateErrorMessage(data)))
 });
