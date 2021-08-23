@@ -11,6 +11,7 @@ export default function AddTodo({ addTodoToUi, user }) {
   const addTodo = () => {
     setIsLoading(true);
     requestAddTodo(user?.username, todoValue).then(todoData => {
+      setTodoValue('');
       addTodoToUi(todoData);
     }).catch(err => {
       showToast({

@@ -8,7 +8,7 @@ export default function TodoItem({ todo, deleteFromUi }) {
   }
 
   return (
-    <Flex background="gray.700" alignItems="center" justifyContent="space-between" p={3} borderRadius={5}>
+    <Flex mt={3} background="gray.700" alignItems="center" justifyContent="space-between" p={3} borderRadius={5}>
       <Text fontSize="xl">{todo?.title}</Text>
       <Button onClick={deleteTodo}>🗑️</Button>
     </Flex>
