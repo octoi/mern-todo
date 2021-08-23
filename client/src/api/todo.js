@@ -19,3 +19,20 @@ export const getAllTodos = (username) => {
     })
   });
 }
+
+export const addTodo = ({ username, todo }) => {
+  return new Promise((resolve, reject) => {
+    axios.post(`${url}/create`, { todo, username }).then((res) => {
+      const data = res.data;
+
+      if (data?.status === 404) {
+        reject(data.message);
+      } else {
+        resolve(data?.message);
+      }
+    }).catch(err => {
+      console.log(err)
+      reject();
+    })
+  });
+}
