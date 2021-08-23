@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   const addTodoToUi = (todo) => {
-    setAllTodo([...allTodo, todo]);
+    setAllTodo([todo, ...allTodo]);
   }
 
   return (

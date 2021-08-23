@@ -20,7 +20,7 @@ export const getAllTodos = (username) => {
   });
 }
 
-export const addTodo = ({ username, todo }) => {
+export const addTodo = (username, todo) => {
   return new Promise((resolve, reject) => {
     axios.post(`${url}/create`, { todo, username }).then((res) => {
       const data = res.data;
