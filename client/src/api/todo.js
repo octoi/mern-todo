@@ -36,3 +36,20 @@ export const addTodo = (username, todo) => {
     })
   });
 }
+
+export const deleteTodo = (username, todoId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`${url}/delete`, { headers: { username, todoId } }).then((res) => {
+      const data = res.data;
+
+      if (data?.status === 404) {
+        reject(data.message);
+      } else {
+        resolve(data?.message);
+      }
+    }).catch(err => {
+      console.log(err)
+      reject();
+    })
+  });
+}
