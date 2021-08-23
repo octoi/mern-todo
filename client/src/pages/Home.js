@@ -3,6 +3,7 @@ import { Flex, InputGroup, InputRightElement, Button, Input } from '@chakra-ui/r
 import { getAllTodos } from '../api/todo';
 import Auth from '../components/Auth';
 import useAppContext from '../context/useAppContext';
+import TodoItem from '../components/TodoItem';
 
 export default function Home() {
   const [todoValue, setTodoValue] = useState('');
@@ -41,7 +42,7 @@ export default function Home() {
         </InputGroup>
       </Flex>
       <Flex mt={10} direction="column">
-        {allTodo.map(todo => <p>{todo?.title}</p>)}
+        {allTodo.map(todo => <TodoItem todo={todo} key={todo?._id} />)}
       </Flex>
     </Auth>
   )
