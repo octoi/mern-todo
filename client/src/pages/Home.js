@@ -19,6 +19,12 @@ export default function Home() {
     })
   }, [user])
 
+  const deleteTodoFromUi = (id) => {
+    const currentAllTodo = [...allTodo];
+    const newcurrentAllTodo = currentAllTodo.filter(todo => todo?._id !== id);
+    setAllTodo(newcurrentAllTodo);
+  }
+
   return (
     <Auth isHome>
       <Flex mt={12} direction='column'>
@@ -42,7 +48,7 @@ export default function Home() {
         </InputGroup>
       </Flex>
       <Flex mt={10} direction="column">
-        {allTodo.map(todo => <TodoItem todo={todo} key={todo?._id} />)}
+        {allTodo.map(todo => <TodoItem todo={todo} key={todo?._id} deleteFromUi={deleteTodoFromUi} />)}
       </Flex>
     </Auth>
   )
